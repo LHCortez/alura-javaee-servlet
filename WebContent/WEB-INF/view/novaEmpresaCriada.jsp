@@ -16,6 +16,6 @@
 		<c:if test="${empty empresa }">
 		Nenhuma empresa cadastrada.
 		</c:if>
-
+	<c:import url="logout-parcial.jsp"/>
 	</body>
 </html>

@@ -17,5 +17,6 @@
 		<input type="hidden" name="acao" value="NovaEmpresa">
 		<input type="submit" value="enviar">
 	</form>
+		<c:import url="logout-parcial.jsp"/>
 </body>
 </html>
