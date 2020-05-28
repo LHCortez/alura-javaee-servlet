@@ -26,37 +26,39 @@ public class UnicaEntradaServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String paramAcao = request.getParameter("acao");
-
-		HttpSession sessao = request.getSession();
-		boolean usuarioNaoEstaLogado = (sessao.getAttribute("usuarioLogado") == null);
-		boolean ehUmaAcaoProtegida = !(paramAcao.equals("Login") || paramAcao.equals("LoginForm"));
-
-		if (ehUmaAcaoProtegida && usuarioNaoEstaLogado) {
-			response.sendRedirect("entrada?acao=LoginForm");
-			return;
-		}
-
-		String nomeDaClasse = "br.com.alura.gerenciador.acao." + paramAcao;
-
-		String nome;
-		try {
-			Class classe = Class.forName(nomeDaClasse);
-			Acao acao = (Acao) classe.newInstance();
-			nome = acao.executa(request, response);
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-
-			throw new ServletException(e);
-		}
-
-		String[] tipoEEndereço = nome.split(":");
-		if (tipoEEndereço[0].equals("forward")) {
-			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/" + tipoEEndereço[1]);
-			rd.forward(request, response);
-		} else {
-			response.sendRedirect(tipoEEndereço[1]);
-		}
 	}
 }
+
+//		HttpSession sessao = request.getSession();
+//		boolean usuarioNaoEstaLogado = (sessao.getAttribute("usuarioLogado") == null);
+//		boolean ehUmaAcaoProtegida = !(paramAcao.equals("Login") || paramAcao.equals("LoginForm"));
+//
+//		if (ehUmaAcaoProtegida && usuarioNaoEstaLogado) {
+//			response.sendRedirect("entrada?acao=LoginForm");
+//			return;
+//		}
+//
+//		String nomeDaClasse = "br.com.alura.gerenciador.acao." + paramAcao;
+//
+//		String nome;
+//		try {
+//			Class classe = Class.forName(nomeDaClasse);
+//			Acao acao = (Acao) classe.newInstance();
+//			nome = acao.executa(request, response);
+//		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+//
+//			throw new ServletException(e);
+//		}
+//
+//		String[] tipoEEndereço = nome.split(":");
+//		if (tipoEEndereço[0].equals("forward")) {
+//			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/" + tipoEEndereço[1]);
+//			rd.forward(request, response);
+//		} else {
+//			response.sendRedirect(tipoEEndereço[1]);
+//		}
+//	}
+//}
 
 //	
 //		if (paramAcao.equals("ListaEmpresas")) {
